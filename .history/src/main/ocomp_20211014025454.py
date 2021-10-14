@@ -21,6 +21,7 @@ class MyClient(discord.Client):
             
             return await db.set_user(tokens[1], tokens[2])
 
+ç
         if len(tokens) < 4 and tokens[0].startswith('!compare'):
             await message.channel.send('{0.author.mention}, please use your command this way: \n!compare user1 user2, such as: \n!compare Exor Bosco Ana'.format(message))
             return

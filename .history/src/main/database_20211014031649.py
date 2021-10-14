@@ -4,7 +4,6 @@ from firebase_admin import db
 import scrapy
 from scrapy.crawler import CrawlerProcess
 
-
 cred = credentials.Certificate("/Users/rickydaricky/Desktop/ocomp/overbuff-compare-firebase-adminsdk-h8051-7f0b808aa7.json")
 firebase_admin.initialize_app(cred, {'databaseURL': 'https://overbuff-compare-default-rtdb.firebaseio.com'})
 ref = db.reference("/Users")
@@ -59,4 +58,5 @@ class Overbuff404Crawler(scrapy.Spider):
             print(len(response.css(".layout_error::text").getall()))
             return True
         return False
+        
         

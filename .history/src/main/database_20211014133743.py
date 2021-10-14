@@ -60,3 +60,4 @@ class Overbuff404Crawler(scrapy.Spider):
             return True
         return False
         
+        

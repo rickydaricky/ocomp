@@ -19,7 +19,8 @@ class MyClient(discord.Client):
                 await message.channel.send('{0.author.mention}, please use your command this way: \n!add battle_id your_own_nickname (case sensitive) \nsuch as: !add Exor#11705 Exor'.format(message))
                 return
             
-            return await db.set_user(tokens[1], tokens[2])
+            return db.set_user(tokens[1], tokens[2])
+
 
         if len(tokens) < 4 and tokens[0].startswith('!compare'):
             await message.channel.send('{0.author.mention}, please use your command this way: \n!compare user1 user2, such as: \n!compare Exor Bosco Ana'.format(message))

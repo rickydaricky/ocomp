@@ -3,7 +3,14 @@ from firebase_admin import credentials
 from firebase_admin import db
 import scrapy
 from scrapy.crawler import CrawlerProcess
-
+from scrapy.crawler import Crawler
+from scrapy.conf import settings
+from myspider import MySpider
+from scrapy import log, project
+from twisted.internet import reactor
+from billiard import Process
+from scrapy.utils.project import get_project_settings
+from scrapy import signals
 
 cred = credentials.Certificate("/Users/rickydaricky/Desktop/ocomp/overbuff-compare-firebase-adminsdk-h8051-7f0b808aa7.json")
 firebase_admin.initialize_app(cred, {'databaseURL': 'https://overbuff-compare-default-rtdb.firebaseio.com'})
@@ -59,4 +66,5 @@ class Overbuff404Crawler(scrapy.Spider):
             print(len(response.css(".layout_error::text").getall()))
             return True
         return False
+        
         
