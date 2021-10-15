@@ -5,7 +5,7 @@ import scrapy
 from scrapy.crawler import CrawlerProcess
 from scrapy import signals
 from scrapy.signalmanager import dispatcher
-
+from scrapy.utils.project import get_project_settings
 
 initialized = False
 
@@ -40,7 +40,7 @@ class Stats():
 
             dispatcher.connect(crawler_results, signal=signals.item_passed)
 
-            process = CrawlerProcess()
+            process = CrawlerProcess(get_project_settings())
             process.crawl(Overbuff404Crawler, url = overbuff_url)
 
             global initialized

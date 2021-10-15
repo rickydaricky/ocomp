@@ -5,7 +5,7 @@ import scrapy
 from scrapy.crawler import CrawlerProcess
 from scrapy import signals
 from scrapy.signalmanager import dispatcher
-
+from scrapy.utils.project import get_project_settings
 
 initialized = False
 
@@ -28,27 +28,7 @@ class Database():
 
         ref.set({nickname: {'battle_id': battle_id}})
 
-    
-
 class Stats():
-
-    def spider_results(overbuff_url):
-        results = []
-
-        def crawler_results(signal, sender, item, response, spider):
-            results.append(item)
-
-            dispatcher.connect(crawler_results, signal=signals.item_passed)
-
-            process = CrawlerProcess()
-            process.crawl(Overbuff404Crawler, url = overbuff_url)
-
-            global initialized
-            if (not initialized):
-                initialized = True
-                process.start()  # the script will block here until the crawling is finished
-
-            return results    
     
     async def not_active(battle_id):
         split_battle_id = list(battle_id)
@@ -66,8 +46,6 @@ class Stats():
 
         overbuff_url = 'https://www.overbuff.com/players/pc/' + overbuff_battle_id + '?mode=competitive'
 
-        Stats.spider_results(overbuff_url)
-
         process = CrawlerProcess()
         data = process.crawl(Overbuff404Crawler, url = overbuff_url)
         global initialized
@@ -83,10 +61,6 @@ class Stats():
         return (await data)['user_not_found']
 
 
-
-
-
-
 class Overbuff404(scrapy.Item):
     user_not_found = scrapy.Field()
         
@@ -95,10 +69,23 @@ class Overbuff404Crawler(scrapy.Spider):
     allowed_domains = ['www.overbuff.com/players/pc/']
     start_urls = []
     handle_httpstatus_list = [404]
-
     def __init__(self, url=None, *args, **kwargs):
         super(Overbuff404Crawler, self).__init__(*args, **kwargs)
         self.start_urls = [f'{url}']
+
+
+    def spider_results():
+        results = []
+
+    def crawler_results(signal, sender, item, response, spider):
+        results.append(item)
+
+        dispatcher.connect(crawler_results, signal=signals.item_passed)
+
+        process = CrawlerProcess(get_project_settings())
+        process.crawl(MySpider)
+        process.start()  # the script will block here until the crawling is finished
+        return results
 
     def parse(self, response):
         item = Overbuff404()

@@ -5,7 +5,7 @@ import scrapy
 from scrapy.crawler import CrawlerProcess
 from scrapy import signals
 from scrapy.signalmanager import dispatcher
-
+from scrapy.utils.project import get_project_settings
 
 initialized = False
 
@@ -40,14 +40,14 @@ class Stats():
 
             dispatcher.connect(crawler_results, signal=signals.item_passed)
 
-            process = CrawlerProcess()
+            process = CrawlerProcess(get_project_settings())
             process.crawl(Overbuff404Crawler, url = overbuff_url)
 
             global initialized
             if (not initialized):
                 initialized = True
                 process.start()  # the script will block here until the crawling is finished
-
+                
             return results    
     
     async def not_active(battle_id):
@@ -66,7 +66,7 @@ class Stats():
 
         overbuff_url = 'https://www.overbuff.com/players/pc/' + overbuff_battle_id + '?mode=competitive'
 
-        Stats.spider_results(overbuff_url)
+        spider_results(overbuff_url)
 
         process = CrawlerProcess()
         data = process.crawl(Overbuff404Crawler, url = overbuff_url)
