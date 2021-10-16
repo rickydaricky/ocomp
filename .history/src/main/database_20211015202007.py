@@ -6,7 +6,6 @@ from scrapy.crawler import CrawlerProcess
 from scrapy import signals
 from scrapy.signalmanager import dispatcher
 import json
-import os
 
 initialized = False
 
@@ -65,17 +64,9 @@ class Stats():
         # else:
         #     return True
 
-        f = open('items.json')
-        data = json.load(f)
-        user_not_found = data[0]['user_not_found']
-        f.close()
-
-        filePath = 'items.json'
-
-        if os.path.exists(filePath):
-            os.remove(filePath)
-
-        return user_not_found
+        json.load(file object)
+        
+        return False
 
 
 class Overbuff404(scrapy.Item):

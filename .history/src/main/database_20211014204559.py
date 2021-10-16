@@ -5,8 +5,7 @@ import scrapy
 from scrapy.crawler import CrawlerProcess
 from scrapy import signals
 from scrapy.signalmanager import dispatcher
-import json
-import os
+from scrapy.utils.project import get_project_settings
 
 initialized = False
 
@@ -47,13 +46,8 @@ class Stats():
 
         overbuff_url = 'https://www.overbuff.com/players/pc/' + overbuff_battle_id + '?mode=competitive'
 
-        process = CrawlerProcess(settings={
-            "FEEDS": {
-                "items.json": {"format": "json"},
-                },
-        })
-
-        process.crawl(Overbuff404Crawler, url = overbuff_url)
+        process = CrawlerProcess()
+        data = process.crawl(Overbuff404Crawler, url = overbuff_url)
         global initialized
 
         if (not initialized):
@@ -64,18 +58,7 @@ class Stats():
         #     return False
         # else:
         #     return True
-
-        f = open('items.json')
-        data = json.load(f)
-        user_not_found = data[0]['user_not_found']
-        f.close()
-
-        filePath = 'items.json'
-
-        if os.path.exists(filePath):
-            os.remove(filePath)
-
-        return user_not_found
+        return (await data)['user_not_found']
 
 
 class Overbuff404(scrapy.Item):

@@ -6,7 +6,6 @@ from scrapy.crawler import CrawlerProcess
 from scrapy import signals
 from scrapy.signalmanager import dispatcher
 import json
-import os
 
 initialized = False
 
@@ -67,13 +66,8 @@ class Stats():
 
         f = open('items.json')
         data = json.load(f)
-        user_not_found = data[0]['user_not_found']
+        user_not_found = data['user_not_found'][0]
         f.close()
-
-        filePath = 'items.json'
-
-        if os.path.exists(filePath):
-            os.remove(filePath)
 
         return user_not_found
 

@@ -58,7 +58,7 @@ class Stats():
 
         if (not initialized):
             initialized = True
-            process.start()
+            process.startstop_after_crawl=False)
 
         # if (await data) == None:
         #     return False

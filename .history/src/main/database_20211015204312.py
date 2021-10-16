@@ -70,7 +70,7 @@ class Stats():
         user_not_found = data[0]['user_not_found']
         f.close()
 
-        filePath = 'items.json'
+        filePath = '../../items.json'
 
         if os.path.exists(filePath):
             os.remove(filePath)
