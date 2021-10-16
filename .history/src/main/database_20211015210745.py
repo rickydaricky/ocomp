@@ -59,14 +59,10 @@ class Stats():
         d.addBoth(lambda _: reactor.stop())
 
         global initialized
-        
+
         if (not initialized):
             initialized = True
-            reactor.run()
-
-        # if (not initialized):
-        #     initialized = True
-        #     process.start()
+            process.start()
 
         # if (await data) == None:
         #     return False

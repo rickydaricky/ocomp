@@ -5,10 +5,8 @@ import scrapy
 from scrapy.crawler import CrawlerRunner, CrawlerProcess
 from scrapy import signals
 from scrapy.signalmanager import dispatcher
-from twisted.internet import reactor
 import json
 import os
-
 
 initialized = False
 
@@ -55,18 +53,12 @@ class Stats():
                 },
         })
 
-        d = process.crawl(Overbuff404Crawler, url = overbuff_url)
-        d.addBoth(lambda _: reactor.stop())
-
+        process.crawl(Overbuff404Crawler, url = overbuff_url)
         global initialized
-        
+
         if (not initialized):
             initialized = True
-            reactor.run()
-
-        # if (not initialized):
-        #     initialized = True
-        #     process.start()
+            process.start()
 
         # if (await data) == None:
         #     return False

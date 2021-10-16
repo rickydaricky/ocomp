@@ -57,12 +57,12 @@ class Stats():
 
         d = process.crawl(Overbuff404Crawler, url = overbuff_url)
         d.addBoth(lambda _: reactor.stop())
-
-        global initialized
         
         if (not initialized):
             initialized = True
             reactor.run()
+
+        global initialized
 
         # if (not initialized):
         #     initialized = True
