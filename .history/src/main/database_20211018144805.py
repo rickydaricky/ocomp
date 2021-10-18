@@ -143,7 +143,6 @@ def replace_last_char(battle_id, old_char, new_char):
 
     split_battle_id[hashtag_index] = new_char
     return "".join(split_battle_id)
-    
 
 def id_to_url(battle_id):
     """Converts a battle id to a url based on that battle id

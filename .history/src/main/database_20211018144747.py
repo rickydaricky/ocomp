@@ -143,7 +143,23 @@ def replace_last_char(battle_id, old_char, new_char):
 
     split_battle_id[hashtag_index] = new_char
     return "".join(split_battle_id)
-    
+
+
+# def replace_hashtag(battle_id):
+#     """Converts a battle id to a url based on that battle id"""
+#     split_battle_id = list(battle_id)
+#     index = 0
+#     hashtag_index = -1
+#     for char in battle_id:
+#         if char == '#':
+#             hashtag_index = index
+#         index += 1
+#     if hashtag_index == -1:
+#         return battle_id
+
+#     split_battle_id[hashtag_index] = '-'
+#     return "".join(split_battle_id)
+
 
 def id_to_url(battle_id):
     """Converts a battle id to a url based on that battle id
