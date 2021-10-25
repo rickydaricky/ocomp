@@ -1,0 +1,1 @@
+hero_list = ['ana', 'ashe', 'baptiste', 'bastion', 'brigitte', '']
