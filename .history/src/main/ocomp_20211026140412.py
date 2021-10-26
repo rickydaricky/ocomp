@@ -1,22 +1,15 @@
 """Modules imports: discord and database items"""
 import discord
 from database import Database, replace_last_char
-from discord.ext import commands
 
 db = Database()
-bot = commands.Bot(command_prefix='.')
 
 
-class MyClient(discord.Client):
+class MyClient(discord.Client(dm_messages = False)):
     """
     Runs the discord bot and keeps it active.
     Implements the repl as well.
     """
-
-
-    @bot.command()
-    async def test(ctx, arg):
-        await ctx.channel.send(arg)
 
     async def on_ready(self):
         """
@@ -25,10 +18,6 @@ class MyClient(discord.Client):
         print('Logged on as {0}!'.format(self.user))
         await db.refresh_top100()
         print('\ndone!')
-
-    # @bot.command()
-    # async def addme():
-
 
     async def on_message(self, message):
         """

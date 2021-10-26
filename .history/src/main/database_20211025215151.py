@@ -122,10 +122,8 @@ class Database():
                 # 1 means val_2 should be emphasized
                 status = 0
 
-                if 'Deaths' in key:
-                    val_1_f = float(val_1)
-                    val_2_f = float(val_2)
-                    status = val_comp(val_2_f, val_1_f)
+                if key == 'Deaths':
+                    status = val_comp(val_2, val_1)
                 elif key == 'Record':
                     status = 0
                 elif key == 'Time Played':
@@ -168,11 +166,8 @@ class Database():
                     val_1_f = float(val_1[:-2])
                     val_2_f = float(val_2[:-2])
                     status = val_comp(val_1_f, val_2_f)
-                elif key == 'Final Blows' or key == 'Obj Kills' \
-                    or key == 'Eliminations' or key == 'Destruct Kills':
+                elif key == 'Final Blows':
                     val_1_f = float(val_1)
-                    val_2_f = float(val_2)
-                    status = val_comp(val_1_f, val_2_f)
                 else:
                     status = val_comp(val_1, val_2)
 

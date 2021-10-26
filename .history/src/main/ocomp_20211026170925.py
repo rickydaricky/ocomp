@@ -4,7 +4,6 @@ from database import Database, replace_last_char
 from discord.ext import commands
 
 db = Database()
-bot = commands.Bot(command_prefix='.')
 
 
 class MyClient(discord.Client):
@@ -13,6 +12,7 @@ class MyClient(discord.Client):
     Implements the repl as well.
     """
 
+    bot = commands.Bot(command_prefix='.')
 
     @bot.command()
     async def test(ctx, arg):

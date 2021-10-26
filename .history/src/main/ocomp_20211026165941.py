@@ -4,7 +4,6 @@ from database import Database, replace_last_char
 from discord.ext import commands
 
 db = Database()
-bot = commands.Bot(command_prefix='.')
 
 
 class MyClient(discord.Client):
@@ -12,11 +11,6 @@ class MyClient(discord.Client):
     Runs the discord bot and keeps it active.
     Implements the repl as well.
     """
-
-
-    @bot.command()
-    async def test(ctx, arg):
-        await ctx.channel.send(arg)
 
     async def on_ready(self):
         """
@@ -26,9 +20,8 @@ class MyClient(discord.Client):
         await db.refresh_top100()
         print('\ndone!')
 
-    # @bot.command()
-    # async def addme():
-
+    @bot.command()
+    async def addme()
 
     async def on_message(self, message):
         """

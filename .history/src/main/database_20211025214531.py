@@ -122,10 +122,8 @@ class Database():
                 # 1 means val_2 should be emphasized
                 status = 0
 
-                if 'Deaths' in key:
-                    val_1_f = float(val_1)
-                    val_2_f = float(val_2)
-                    status = val_comp(val_2_f, val_1_f)
+                if key == 'Deaths':
+                    status = val_comp(val_2, val_1)
                 elif key == 'Record':
                     status = 0
                 elif key == 'Time Played':
@@ -160,18 +158,10 @@ class Database():
                         val_2_f = int(val_2.replace('%', ''))
                         status = val_comp(val_1_f, val_2_f)
                     else:
-                        if '#' in val_1:
-                            status = -1
-                        else:
-                            status = 1
+                        status = val_comp(val_1, val_2)
                 elif key == 'Win Rate':
                     val_1_f = float(val_1[:-2])
                     val_2_f = float(val_2[:-2])
-                    status = val_comp(val_1_f, val_2_f)
-                elif key == 'Final Blows' or key == 'Obj Kills' \
-                    or key == 'Eliminations' or key == 'Destruct Kills':
-                    val_1_f = float(val_1)
-                    val_2_f = float(val_2)
                     status = val_comp(val_1_f, val_2_f)
                 else:
                     status = val_comp(val_1, val_2)

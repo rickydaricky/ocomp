@@ -40,7 +40,7 @@ class Database():
     async def set_user(self, battle_id, nickname):
         """Adds a player's battle_id to to their discord tag
         """
-        nonactivity = await not_active(battle_id)
+        nonactivity = await nott_active(battle_id)
         if nonactivity == 0:
             print('Battle_ID not found')
             return 0
@@ -86,7 +86,7 @@ class Database():
 
     @staticmethod
     async def refresh_top100():
-        """Crawls through the top 100 players on
+        """Crawls through the top 100 players on 
         overbuff and adds them to the database
         """
         top_url = 'https://www.overbuff.com/rankings'
@@ -99,6 +99,7 @@ class Database():
             player_url = player.contents[0].contents[0]['href']
             player_id = player_url[12:]
             ref.update({player_id: {'battle_id': player_id}})
+            
 
     async def compare(self, player_1, player_2, hero):
         """Compares 2 players's overbuff stats on a particular hero
@@ -122,10 +123,8 @@ class Database():
                 # 1 means val_2 should be emphasized
                 status = 0
 
-                if 'Deaths' in key:
-                    val_1_f = float(val_1)
-                    val_2_f = float(val_2)
-                    status = val_comp(val_2_f, val_1_f)
+                if key == 'Deaths':
+                    status = val_comp(val_2, val_1)
                 elif key == 'Record':
                     status = 0
                 elif key == 'Time Played':
@@ -151,27 +150,11 @@ class Database():
                 elif key == 'Hero Rank':
                     if val_1 == '∞' or val_2 == '∞':
                         status = 0
-                    elif '#' in val_1 and '#' in val_2:
-                        val_1_f = int(val_1.replace('#', ''))
-                        val_2_f = int(val_2.replace('#', ''))
-                        status = val_comp(val_2_f, val_1_f)
-                    elif '%' in val_1 and '%' in val_2:
-                        val_1_f = int(val_1.replace('%', ''))
-                        val_2_f = int(val_2.replace('%', ''))
-                        status = val_comp(val_1_f, val_2_f)
                     else:
-                        if '#' in val_1:
-                            status = -1
-                        else:
-                            status = 1
+                        status = val_comp(val_1, val_2)
                 elif key == 'Win Rate':
                     val_1_f = float(val_1[:-2])
                     val_2_f = float(val_2[:-2])
-                    status = val_comp(val_1_f, val_2_f)
-                elif key == 'Final Blows' or key == 'Obj Kills' \
-                    or key == 'Eliminations' or key == 'Destruct Kills':
-                    val_1_f = float(val_1)
-                    val_2_f = float(val_2)
                     status = val_comp(val_1_f, val_2_f)
                 else:
                     status = val_comp(val_1, val_2)
@@ -214,7 +197,7 @@ def word_match(word, word_list):
     length_possibles = len(possibles)
     if length_possibles != 1:
         for item in possibles:
-            if word == item.lower() or word == item[:item.find('-')].lower():
+            if word == item:
                 return item
         print(f'\n{word}, {possibles}')
         raise ValueError(
@@ -249,7 +232,7 @@ def id_to_url(battle_id):
     return url
 
 
-async def not_active(battle_id):
+async def nott_active(battle_id):
     """Checks if a battle_id is real
     """
     overbuff_url = id_to_url(battle_id)

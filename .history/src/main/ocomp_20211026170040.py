@@ -4,7 +4,6 @@ from database import Database, replace_last_char
 from discord.ext import commands
 
 db = Database()
-bot = commands.Bot(command_prefix='.')
 
 
 class MyClient(discord.Client):
@@ -13,11 +12,8 @@ class MyClient(discord.Client):
     Implements the repl as well.
     """
 
-
-    @bot.command()
-    async def test(ctx, arg):
-        await ctx.channel.send(arg)
-
+    bot = commands.Bot(command_prefix='$')
+    
     async def on_ready(self):
         """
         Prints that the bot is logged on once it's logged on
@@ -26,9 +22,8 @@ class MyClient(discord.Client):
         await db.refresh_top100()
         print('\ndone!')
 
-    # @bot.command()
-    # async def addme():
-
+    @bot.command()
+    async def addme()
 
     async def on_message(self, message):
         """
