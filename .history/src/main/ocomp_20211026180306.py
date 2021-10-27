@@ -1,4 +1,5 @@
 """Modules imports: discord and database items"""
+import discord
 from database import Database, replace_last_char
 from discord.ext import commands
 
@@ -12,7 +13,6 @@ async def on_ready():
     """
     Prints that the bot is logged on once it's logged on
     """
-
     print(f'Logged on as {bot.user.name}!')
     await db.refresh_top100()
     print('\ndone!')
@@ -31,15 +31,12 @@ async def com(ctx):
                    f'`.compare [discord_user_1] [discord_user_2] [hero_name]` '
                    ':: compares two players\' stats on a particular hero')
 
-# @bot.command(name='prefix', help='Changes my prefix to whatever you want!')
-
 
 @bot.command(help='Adds the battle ID to the discord user in the database\n'
-             f'Usage:\n{prefix}addme battle_id \nsuch as: '
-             f'{prefix}addme Exor#11705')
+             'Usage:\n.addme battle_id \nsuch as: '
+             '.addme Exor#11705')
 async def addme(ctx, *args):
     """Adds the listed battle id to the discord user in the database"""
-
     if len(args) != 1:
         await ctx.send('{0.author.mention}, please use your command this way:'
                        ' \n.addme battle_id \nsuch as: '
@@ -67,11 +64,10 @@ async def addme(ctx, *args):
 
 
 @bot.command(help='Compares the stats of the two listed players from the database.\n'
-             f'Usage:\n{prefix}compare user1 user2, such as: '
-             f'\n{prefix}compare Exor Bosco Ana')
+             'Usage:\n.compare user1 user2, such as: '
+             '\n.compare Exor Bosco Ana')
 async def compare(ctx, *args):
     """Compares the stats of the two listed players from the database."""
-
     if len(args) != 3:
         await ctx.send('{0.author.mention}, '
                        'please use your command this way: '
@@ -103,11 +99,10 @@ async def compare(ctx, *args):
 
 
 @bot.command(name='hero', help='Shows your stats on a specific hero!\n'
-             f'Usage:\n{prefix}hero [hero_name], such as:'
-             f'\n{prefix}hero ana')
+f'Usage:\n{prefix}hero [hero_name]'
+'for example: ')
 async def single_hero_stats(ctx, *args):
     """Shows the stats of the calling discord user on a specific hero"""
-
     data = await db.find_hero(replace_last_char(str(ctx.message.author),
                                                 '#', '-'), args[0].lower())
     if data == 'error':
@@ -115,5 +110,29 @@ async def single_hero_stats(ctx, *args):
     await ctx.send(f'{ctx.message.author.mention}, '
                    f'here are your stats on {args[0]} per 10: {data}')
     return
+
+
+# async def on_message(message):
+#     """
+#     Bot REPL
+#     """
+#     print('Message from {0.author}: {0.content}'.format(message))
+
+#     tokens = message.content.split(' ')
+
+#     if len(tokens) == 0:
+#         return
+
+#     if tokens[0].startswith('.compare'):
+
+#     if tokens[0].startswith('.hero'):
+#         data = await db.find_hero(replace_last_char(str(message.author),
+#                                                     '#', '-'), tokens[1].lower())
+#         if data == 'error':
+#             return
+#         await message.channel.send(f'{message.author.mention}, '
+#                                    f'here are your stats on {tokens[1]} per 10: {data}')
+#         return
+
 
 bot.run('ODk3OTA5MTcwODA2ODgyMzY1.YWchFA.0pbCHQYXEBylmoBWM_5lfh7G3fM')

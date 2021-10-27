@@ -1,4 +1,5 @@
 """Modules imports: discord and database items"""
+import discord
 from database import Database, replace_last_char
 from discord.ext import commands
 
@@ -30,8 +31,6 @@ async def com(ctx):
                    'displays your competitive stats on a partiular hero\n'
                    f'`.compare [discord_user_1] [discord_user_2] [hero_name]` '
                    ':: compares two players\' stats on a particular hero')
-
-# @bot.command(name='prefix', help='Changes my prefix to whatever you want!')
 
 
 @bot.command(help='Adds the battle ID to the discord user in the database\n'

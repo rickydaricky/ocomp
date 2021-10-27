@@ -31,8 +31,6 @@ async def com(ctx):
                    f'`.compare [discord_user_1] [discord_user_2] [hero_name]` '
                    ':: compares two players\' stats on a particular hero')
 
-# @bot.command(name='prefix', help='Changes my prefix to whatever you want!')
-
 
 @bot.command(help='Adds the battle ID to the discord user in the database\n'
              f'Usage:\n{prefix}addme battle_id \nsuch as: '
