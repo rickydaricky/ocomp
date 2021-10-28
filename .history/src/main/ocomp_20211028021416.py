@@ -227,7 +227,7 @@ async def compare_slash(ctx, user_1, user_2, hero_name):
                                                                   user_2), '-', '#')
         len_1 = len(player_1_hashtag)
         space_gap = ' ' * max(0, round(1.8 * (25 - len_1)))
-        await ctx.send(f'{ctx.author.mention}, here is how '
+        await ctx.send(f'{ctx.message.author.mention}, here is how '
                        f'{player_1_hashtag} '
                        f'and {player_2_hashtag}'
                        f' match up on {hero}:\n\n'
