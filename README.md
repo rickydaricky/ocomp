@@ -27,3 +27,12 @@ Once you add yourself to your server-specific Ocomp database (stored in Firebase
 
 - I'll probably update the bot once Discord updates their Python api with native slash command support, since I'm currently using the discord_slash module.
 - If the bot is down for whatever reason or you encounter any bugs, please contact me!
+
+## Modules used
+
+- Discord.py for core functionality, including commands, prefixes, and Discord connections
+- discord_slash for slash command support
+- re for regex when matching names
+-  firebase_admin for the Firebase connection
+-  requests for setting up web connections to the user Overbuff page
+-  bs4 for BeautifulSoup's splicing and dicing
