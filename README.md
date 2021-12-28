@@ -4,7 +4,9 @@ This is a simple discord bot that tracks your Overwatch stats and lets you compa
 
 ## How do I use it?
 
-The invite link is: https://discord.com/api/oauth2/authorize?client_id=897909170806882365&permissions=517543939136&scope=bot%20applications.commands
+The bot is available here: https://top.gg/bot/897909170806882365
+
+If you can't access it from the website, the invite link is: https://discord.com/api/oauth2/authorize?client_id=897909170806882365&permissions=517543939136&scope=bot%20applications.commands
 
 The bot supports slash commands, but its default prefix is "."
 
