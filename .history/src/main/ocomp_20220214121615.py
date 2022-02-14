@@ -293,6 +293,5 @@ async def single_hero_stats_slash(ctx, hero_name):
                        'Please use the addme command first.')
         return
 
-token = open('token.txt')
-bot.run(token.read())
-token.close()
+token = open('../')
+bot.run()
